@@ -87,7 +87,7 @@ buttons = [
         InlineKeyboardButton(text="Help & Commands ❓", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🗲 About Me", callback_data="kratos_"),
+        InlineKeyboardButton(text="⚡ About Me", callback_data="kratos_"),
         InlineKeyboardButton(text="🏥 Support", url=f"https://t.me/{SUPPORT_CHAT}"),
         InlineKeyboardButton(text="📋 Logs", url=f"https://t.me/KratosXLogs"),
     ],
