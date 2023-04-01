@@ -204,12 +204,14 @@ def start(update: Update, context: CallbackContext):
                     send_settings(match.group(1), update.effective_user.id, True)
 
             elif args[0][1:].isdigit() and "rᴜʟᴇs" in IMPORTED:
-                IMPORTED["rᴜʟᴇs"].send_rules(update, args[0], from_pm=True)
+                IMPORTED["Rules"].send_rules(update, args[0], from_pm=True)
 
         else:
             update.effective_message.reply_text(
                 PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
-                  
+                 escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()),  
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -438,7 +440,9 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
-             
+            escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()), 
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
@@ -478,7 +482,9 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
-           
+            escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
