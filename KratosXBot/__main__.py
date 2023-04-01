@@ -744,12 +744,11 @@ def main():
                 photo=START_IMG,
                 caption=f"""
 ㅤ*🤖 {BOT_NAME} is Alive...*
-
 ➖➖➖➖➖➖➖➖➖➖➖➖
-ㅤ★ **Python :** `{y()}`
-ㅤ★ **Library :** `{telever}`
-ㅤ★ **Telethon :** `{tlhver}`
-ㅤ★ **Pyrogram :** `{pyrover}`
+ㅤ★ *Python :* `{y()}`
+ㅤ★ *Library :* `{telever}`
+ㅤ★ *Telethon :* `{tlhver}`
+ㅤ★ *Pyrogram :* `{pyrover}`
 ➖➖➖➖➖➖➖➖➖➖➖➖""",
                 parse_mode=ParseMode.MARKDOWN,
             )
