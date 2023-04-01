@@ -73,11 +73,8 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 ────「 ⲕʀᴀⲧⲟs[🤖](https://te.legra.ph/file/bad946525a29124122534.jpg) 」────
-*Hello {}, This is @KratosXBot.
+*Hello {}, This is {}.
 The Most Powerful & Ruthless Group Management Bot with awesome & useful features.*
-➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-◈ *Uptime:* `{}`
-◈ `{}` *users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ➢ Try The Help Buttons Below To Know My Abilities ☯
 """
@@ -208,11 +205,7 @@ def start(update: Update, context: CallbackContext):
 
         else:
             update.effective_message.reply_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(uptime),
-                    sql.num_users(),
-                    sql.num_chats()),  
+                PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -440,11 +433,7 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
     elif query.data == "kratos_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
-            PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(uptime),
-                    sql.num_users(),
-                    sql.num_chats()), 
+            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME), 
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
@@ -483,11 +472,7 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
-            PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(uptime),
-                    sql.num_users(),
-                    sql.num_chats()),
+            PM_START_TEXT.format(escape_markdown(first_name), BOT_NAME),
             reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.MARKDOWN,
             timeout=60,
