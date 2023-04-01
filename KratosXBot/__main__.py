@@ -363,8 +363,7 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
     if query.data == "kratos_":
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text=f"────「 ⲕʀᴀⲧⲟs[🤖](https://te.legra.ph/file/bad946525a29124122534.jpg) 」────
-            *Hey,* \n  *This is {BOT_NAME}*"
+            text=f"*Hey,* \n  *This is {BOT_NAME}*"
             "\n*A Powerful Group Management Bot built to help you manage your Group easily & to Protect your Group From Scammers & Spammers.*"
             "\n*Written in Python with SqlAlchemy & MongoDB as Database.*"
             "\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖"
