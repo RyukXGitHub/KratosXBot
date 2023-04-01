@@ -208,7 +208,8 @@ def start(update: Update, context: CallbackContext):
 
         else:
             update.effective_message.reply_text(
-                PM_START_TEXT.format((escape_markdown(first_name), BOT_NAME),
+                PM_START_TEXT.format(
+                    escape_markdown(first_name), BOT_NAME,
                  escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),  
@@ -439,7 +440,8 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
     elif query.data == "kratos_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
-            PM_START_TEXT.format((escape_markdown(first_name), BOT_NAME),
+            PM_START_TEXT.format(
+                escape_markdown(first_name), BOT_NAME,
             escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()), 
@@ -481,7 +483,8 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
         query.message.edit_text(
-            PM_START_TEXT.format((escape_markdown(first_name), BOT_NAME),
+            PM_START_TEXT.format(
+                escape_markdown(first_name), BOT_NAME,
             escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
