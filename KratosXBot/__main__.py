@@ -73,7 +73,7 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 ────「 ⲕʀᴀⲧⲟs[🤖](https://te.legra.ph/file/bad946525a29124122534.jpg) 」────
-*Hello {}, This is {}.
+*Hello {}, This is @KratosXBot.
 The Most Powerful & Ruthless Group Management Bot with awesome & useful features.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ◈ *Uptime:* `{}`
@@ -193,7 +193,7 @@ def start(update: Update, context: CallbackContext):
                 )
 
             elif args[0].lower() == "markdownhelp":
-                IMPORTED["Exᴛʀᴀs"].markdown_help_sender(update)
+                IMPORTED["Extras"].markdown_help_sender(update)
             elif args[0].lower().startswith("stngs_"):
                 match = re.match("stngs_(.*)", args[0].lower())
                 chat = dispatcher.bot.getChat(match.group(1))
@@ -209,8 +209,8 @@ def start(update: Update, context: CallbackContext):
         else:
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
-                    escape_markdown(first_name), BOT_NAME,
-                 escape_markdown(uptime),
+                    escape_markdown(first_name),
+                    escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),  
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -441,8 +441,8 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                escape_markdown(first_name), BOT_NAME,
-            escape_markdown(uptime),
+                    escape_markdown(first_name),
+                    escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()), 
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -484,8 +484,8 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                escape_markdown(first_name), BOT_NAME,
-            escape_markdown(uptime),
+                    escape_markdown(first_name),
+                    escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
             reply_markup=InlineKeyboardMarkup(buttons),
