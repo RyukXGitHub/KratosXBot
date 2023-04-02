@@ -50,6 +50,11 @@ def convert(update: Update, context: CallbackContext):
             parse_mode=ParseMode.MARKDOWN,
         )
 
+__help__ = """ Example:
+ /cash 1 USD INR  
+      OR
+ /cash 1 usd inr
+ """
 
 CONVERTER_HANDLER = CommandHandler("cash", convert)
 
