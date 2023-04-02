@@ -73,7 +73,7 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 ────「 ⲕʀᴀⲧⲟs[🤖](https://te.legra.ph/file/bad946525a29124122534.jpg) 」────
-*Hello {}, This is {}.
+*Hello {}, This is @KratosBot.
 The Most Powerful & Ruthless Group Management Bot with awesome & useful features.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ◈ *Uptime:* `{}`
@@ -211,7 +211,7 @@ def start(update: Update, context: CallbackContext):
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
-                    escape_markdown(first_name), BOT_NAME,
+                    escape_markdown(first_name),
                     escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
@@ -443,7 +443,7 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                    escape_markdown(first_name), BOT_NAME, 
+                    escape_markdown(first_name), 
                     escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
@@ -486,7 +486,7 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                escape_markdown(first_name), BOT_NAME,
+                escape_markdown(first_name),
                 escape_markdown(uptime),
                 sql.num_users(),
                 sql.num_chats()),
