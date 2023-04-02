@@ -73,10 +73,9 @@ def get_readable_time(seconds: int) -> str:
 
 PM_START_TEXT = """
 ────「 ⲕʀᴀⲧⲟs[🤖](https://te.legra.ph/file/bad946525a29124122534.jpg) 」────
-*Hello {}, This is @KratosBot.
+*Hello {}, This is {}.
 The Most Powerful & Ruthless Group Management Bot with awesome & useful features.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
-◈ *Uptime:* `{}`
 ◈ `{}` *users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖
 ➢ Try The Help Buttons Below To Know My Abilities ☯
@@ -211,8 +210,7 @@ def start(update: Update, context: CallbackContext):
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(uptime),
+                    escape_markdown(first_name), BOT_NAME,
                     sql.num_users(),
                     sql.num_chats()),
                 reply_markup=InlineKeyboardMarkup(buttons),
@@ -443,8 +441,7 @@ def Kratos_about_callback(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                    escape_markdown(first_name), 
-                    escape_markdown(uptime),
+                    escape_markdown(first_name), BOT_NAME,
                     sql.num_users(),
                     sql.num_chats()),
             reply_markup=InlineKeyboardMarkup(buttons),
@@ -486,8 +483,7 @@ And Using [SqlAlchemy](https://www.sqlalchemy.org) & [MongoDB](https://cloud.mon
         first_name = update.effective_user.first_name
         query.message.edit_text(
             PM_START_TEXT.format(
-                escape_markdown(first_name),
-                escape_markdown(uptime),
+                escape_markdown(first_name), BOT_NAME,
                 sql.num_users(),
                 sql.num_chats()),
             reply_markup=InlineKeyboardMarkup(buttons),
