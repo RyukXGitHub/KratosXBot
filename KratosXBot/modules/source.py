@@ -13,9 +13,9 @@ from KratosXBot import BOT_NAME, BOT_USERNAME, OWNER_ID, START_IMG, pbot
 async def repo(_, message: Message):
     await message.reply_photo(
         photo=START_IMG,
-        caption=f"""**ʜᴇʏ {message.from_user.mention},
+        caption=f"""**Hey {message.from_user.mention},
 
-ɪ ᴀᴍ [{BOT_NAME}](https://t.me/{BOT_USERNAME})**
+I am [{BOT_NAME}](https://t.me/{BOT_USERNAME})**
 
 **» My Developer :** [RyukXGithub](https://github.com/RyukXGitHub)
 **» Python Version :** `{y()}`
@@ -37,4 +37,4 @@ async def repo(_, message: Message):
     )
 
 
-__mod_name__ = "Rᴇᴩᴏ"
+__mod_name__ = "Repo"
