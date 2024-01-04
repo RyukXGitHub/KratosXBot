@@ -145,12 +145,12 @@ def chatbot(update: Update, context: CallbackContext):
             "messages": [{"role": "user", "content": message.text}]
         }
         
-        # Sending the request to the Perplexity API
+       # Sending the request to the Perplexity API
         response = requests.post(url, json=payload, headers=headers)
         print("API Response:", response.text)  # Log the raw API response
 
-        if response.status_code == 200:
-            results = response.json()
+    if response.status_code == 200:
+        results = response.json()
         # Check if the expected keys are in the response
         if 'completions' in results and len(results['completions']) > 0 and 'message' in results['completions'][0]:
             bot_reply = results['completions'][0]['message']['content']
@@ -158,8 +158,9 @@ def chatbot(update: Update, context: CallbackContext):
         else:
             # Handle the situation where the keys are not as expected
             message.reply_text("Sorry, I couldn't process that message.")
-        else:
-            message.reply_text("Sorry, I'm having trouble understanding that right now.")
+    else:
+        message.reply_text("Sorry, I'm having trouble understanding that right now.")
+
 
 
 
