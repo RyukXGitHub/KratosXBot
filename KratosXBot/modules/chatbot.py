@@ -133,39 +133,33 @@ def chatbot(update: Update, context: CallbackContext):
         if not kratos_message(context, message):
             return
         bot.send_chat_action(chat_id, action="typing")
-        
+
+        # Define your API URL here
+        api_url = "https://api.perplexity.ai/chat/completions"
+
         # Updated payload with 'model' and 'messages'
         payload = {
-            "model": "pplx-70b-chat",  # Replace with your actual model name
+            "model": "pplx-70b-chat",  # Chosen model from perplexity.ai
             "messages": [{"role": "user", "content": message.text}]
         }
-        
-        # Your API endpoint and key
-        api_url = "https://api.perplexity.ai/chat/completions"
-        api_key = "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"  # Replace with your actual API key
-        
-        # Preparing the data to send
-        payload = {
-            "prompt": message.text,
-            "max_tokens": 150  # Adjust as per your preference
-        }
-        
+
         # Headers for the POST request
         headers = {
-            "Authorization": f"Bearer {api_key}",
+            "Authorization": f"Bearer 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",  # Replace with your actual API key
             "Content-Type": "application/json"
         }
-        
+
         # Making the POST request to your API
         response = requests.post(api_url, json=payload, headers=headers)
-        
-        # Assuming the response contains a JSON with the key 'text' for the reply
+
+        # Handling different types of responses
         if response.status_code == 200:
             results = response.json()
             reply_text = results.get("text", "Sorry, I couldn't process that.")
         else:
             reply_text = f"Error: {response.status_code}, {response.text}"
 
+        # Sending the reply to the user
         message.reply_text(reply_text)
 
 
