@@ -134,6 +134,12 @@ def chatbot(update: Update, context: CallbackContext):
             return
         bot.send_chat_action(chat_id, action="typing")
         
+        # Updated payload with 'model' and 'messages'
+        payload = {
+            "model": "GPT-4",  # Replace with your actual model name
+            "messages": [{"role": "user", "content": message.text}]
+        }
+        
         # Your API endpoint and key
         api_url = "https://api.perplexity.ai/chat/completions"
         api_key = "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"  # Replace with your actual API key
