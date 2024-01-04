@@ -133,11 +133,30 @@ def chatbot(update: Update, context: CallbackContext):
         if not kratos_message(context, message):
             return
         bot.send_chat_action(chat_id, action="typing")
-        url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/{BOT_NAME}/RyukXGitHub/message={message.text}"
-        request = requests.get(url)
-        results = json.loads(request.text)
-        sleep(0.5)
-        message.reply_text(results["reply"])
+        
+        # Perplexity API endpoint and headers
+        url = "https://api.perplexity.ai/chat/completions"
+        headers = {
+            "Authorization": "Bearer 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"
+        }
+        # Constructing the payload with the desired model and message
+        payload = {
+            "model": "pplx-7b-chat",  # Choose the appropriate model you want to use
+            "messages": [{"role": "user", "content": message.text}]
+        }
+        
+        # Sending the request to the Perplexity API
+        response = requests.post(url, json=payload, headers=headers)
+        if response.status_code == 200:
+            # Parse the response and send the reply back to the chat
+            results = response.json()
+            bot_reply = results['completions'][0]['message']['content']
+            sleep(0.5)
+            message.reply_text(bot_reply)
+        else:
+            message.reply_text("Sorry, I'm having trouble understanding that right now.")
+
+
 
 
 __help__ = f"""
