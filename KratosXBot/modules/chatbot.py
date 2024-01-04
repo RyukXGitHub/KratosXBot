@@ -156,10 +156,12 @@ def chatbot(update: Update, context: CallbackContext):
         # Assuming the response contains a JSON with the key 'text' for the reply
         if response.status_code == 200:
             results = response.json()
-            sleep(0.5)  # You might still want this delay
-            message.reply_text(results.get("text", "Sorry, I couldn't process that."))  # Adjust if your response format is different
+            reply_text = results.get("text", "Sorry, I couldn't process that.")
         else:
-            message.reply_text("Sorry, I'm having trouble understanding that right now.")
+            reply_text = f"Error: {response.status_code}, {response.text}"
+
+        message.reply_text(reply_text)
+
 
 
 
