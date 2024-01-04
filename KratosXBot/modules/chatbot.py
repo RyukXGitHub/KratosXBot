@@ -23,9 +23,6 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import mention_html
 
-from telethon.errors.rpcerrorlist import FloodWaitError
-import asyncio
-
 import KratosXBot.modules.sql.chatbot_sql as sql
 from KratosXBot import BOT_ID, BOT_NAME, BOT_USERNAME, dispatcher
 from KratosXBot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
@@ -136,41 +133,34 @@ def chatbot(update: Update, context: CallbackContext):
         if not kratos_message(context, message):
             return
         bot.send_chat_action(chat_id, action="typing")
-
-        # Define your API URL here
+        
+        # Your API endpoint and key
         api_url = "https://api.perplexity.ai/chat/completions"
-
-        # Updated payload with 'model' and 'messages'
+        api_key = "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"  # Replace with your actual API key
+        
+        # Preparing the data to send
         payload = {
-            "model": "pplx-70b-chat",  # Chosen model from perplexity.ai
-            "messages": [{"role": "user", "content": message.text}]
+            "prompt": message.text,
+            "max_tokens": 150  # Adjust as per your preference
         }
-
+        
         # Headers for the POST request
         headers = {
-            "Authorization": f"Bearer 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",  # Replace with your actual API key
+            "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
         }
+        
+        # Making the POST request to your API
+        response = requests.post(api_url, json=payload, headers=headers)
+        
+        # Assuming the response contains a JSON with the key 'text' for the reply
+        if response.status_code == 200:
+            results = response.json()
+            reply_text = results.get("text", "Sorry, I couldn't process that.")
+        else:
+            reply_text = f"Error: {response.status_code}, {response.text}"
 
-        try:
-            # Making the POST request to your API
-            response = requests.post(api_url, json=payload, headers=headers)
-
-            # Handling different types of responses
-            if response.status_code == 200:
-                results = response.json()
-                reply_text = results.get("text", "Sorry, I couldn't process that.")
-            else:
-                reply_text = f"Error: {response.status_code}, {response.text}"
-
-            # Sending the reply to the user
-            message.reply_text(reply_text)
-
-        except FloodWaitError as e:
-            wait_time = e.seconds  # Get the time to wait from the exception
-            print(f"Rate limit exceeded. Waiting for {wait_time} seconds.")
-            time.sleep(wait_time)  # Wait for the required time before retrying
-
+        message.reply_text(reply_text)
 
 
 
