@@ -147,7 +147,7 @@ def chatbot(update: Update, context: CallbackContext):
         
        # Sending the request to the Perplexity API
         response = requests.post(url, json=payload, headers=headers)
-        print("API Response:", response.text)  # Log the raw API response
+        
 
     if response.status_code == 200:
         results = response.json()
