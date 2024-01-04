@@ -23,6 +23,9 @@ from telegram.ext import (
 )
 from telegram.utils.helpers import mention_html
 
+from telethon.errors.rpcerrorlist import FloodWaitError
+import asyncio
+
 import KratosXBot.modules.sql.chatbot_sql as sql
 from KratosXBot import BOT_ID, BOT_NAME, BOT_USERNAME, dispatcher
 from KratosXBot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
@@ -149,18 +152,24 @@ def chatbot(update: Update, context: CallbackContext):
             "Content-Type": "application/json"
         }
 
-        # Making the POST request to your API
-        response = requests.post(api_url, json=payload, headers=headers)
+        try:
+            # Making the POST request to your API
+            response = requests.post(api_url, json=payload, headers=headers)
 
-        # Handling different types of responses
-        if response.status_code == 200:
-            results = response.json()
-            reply_text = results.get("text", "Sorry, I couldn't process that.")
-        else:
-            reply_text = f"Error: {response.status_code}, {response.text}"
+            # Handling different types of responses
+            if response.status_code == 200:
+                results = response.json()
+                reply_text = results.get("text", "Sorry, I couldn't process that.")
+            else:
+                reply_text = f"Error: {response.status_code}, {response.text}"
 
-        # Sending the reply to the user
-        message.reply_text(reply_text)
+            # Sending the reply to the user
+            message.reply_text(reply_text)
+
+        except FloodWaitError as e:
+            wait_time = e.seconds  # Get the time to wait from the exception
+            print(f"Rate limit exceeded. Waiting for {wait_time} seconds.")
+            time.sleep(wait_time)  # Wait for the required time before retrying
 
 
 
