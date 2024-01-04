@@ -136,7 +136,7 @@ def chatbot(update: Update, context: CallbackContext):
         
         # Updated payload with 'model' and 'messages'
         payload = {
-            "model": "GPT-4",  # Replace with your actual model name
+            "model": "pplx-70b-chat",  # Replace with your actual model name
             "messages": [{"role": "user", "content": message.text}]
         }
         
