@@ -152,14 +152,15 @@ def chatbot(update: Update, context: CallbackContext):
     if response.status_code == 200:
         results = response.json()
         # Check if the expected keys are in the response
-        if 'completions' in results and len(results['completions']) > 0 and 'message' in results['completions'][0]:
-            bot_reply = results['completions'][0]['message']['content']
+        if 'choices' in results and len(results['choices']) > 0 and 'message' in results['choices'][0]:
+            bot_reply = results['choices'][0]['message']['content']
             message.reply_text(bot_reply)
         else:
             # Handle the situation where the keys are not as expected
             message.reply_text("Sorry, I couldn't process that message.")
     else:
         message.reply_text("Sorry, I'm having trouble understanding that right now.")
+
 
 
 
