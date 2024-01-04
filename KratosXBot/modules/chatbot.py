@@ -147,14 +147,20 @@ def chatbot(update: Update, context: CallbackContext):
         
         # Sending the request to the Perplexity API
         response = requests.post(url, json=payload, headers=headers)
+        print("API Response:", response.text)  # Log the raw API response
+
         if response.status_code == 200:
-            # Parse the response and send the reply back to the chat
-            results = response.json()
-            bot_reply = results['completions'][0]['message']['content']
-            sleep(0.5)
-            message.reply_text(bot_reply)
-        else:
-            message.reply_text("Sorry, I'm having trouble understanding that right now.")
+    results = response.json()
+    # Check if the expected keys are in the response
+    if 'completions' in results and len(results['completions']) > 0 and 'message' in results['completions'][0]:
+        bot_reply = results['completions'][0]['message']['content']
+        message.reply_text(bot_reply)
+    else:
+        # Handle the situation where the keys are not as expected
+        message.reply_text("Sorry, I couldn't process that message.")
+else:
+    message.reply_text("Sorry, I'm having trouble understanding that right now.")
+
 
 
 
