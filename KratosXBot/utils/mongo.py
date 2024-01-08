@@ -1,10 +1,22 @@
 from typing import Dict, Union
 
+import os
+import certifi
+
 from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 
 from KratosXBot import MONGO_DB_URI
 
-mongo = MongoCli(MONGO_DB_URI)
+#mongo = MongoCli(MONGO_DB_URI)
+#db = mongo.KratosXBot
+
+# Get the MongoDB URI from the environment variables
+MONGO_DB_URI = os.environ.get("MONGO_DB_URI")
+
+# Create a MongoDB client using the certifi CA bundle for SSL
+mongo = MongoCli(MONGO_DB_URI, tls=True, tlsCAFile=certifi.where())
+
+# Select your database
 db = mongo.KratosXBot
 
 coupledb = db.couple
